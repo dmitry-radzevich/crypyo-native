@@ -3,9 +3,10 @@ import os
 
 
 def deploy(graph, output_folder, **kwargs):
+    builddir = os.environ.get('BUILDDIR', 'build')
     rootfile = graph.root.conanfile
     multi = rootfile.settings.get_safe("compiler") == "msvc"
-    bindir = os.path.join(output_folder, "build", "bin")
+    bindir = os.path.join(output_folder, builddir, "bin")
     if multi:
         bindir = os.path.join(bindir, str(rootfile.settings.build_type))
 
@@ -13,6 +14,7 @@ def deploy(graph, output_folder, **kwargs):
         if dep.folders is None:
             rootfile.output.warning(f"BINDEP: skipping dependency {dep}")
             continue
+        copy(rootfile, "license*", dep.folders.package_folder, os.path.join(bindir, "licenses", str(dep.ref.name) + '-' + str(dep.ref.version)), False, ignore_case=True)
         srcdirs = [os.path.join(str(dep.folders.package_folder), "bin")]
         srcdirs += dep.cpp_info.libdirs
         

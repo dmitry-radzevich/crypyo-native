@@ -3,7 +3,7 @@ from conan.tools.files import copy
 import os
 
 
-class LpadNativeRecipe(ConanFile):
+class CryptoNativeRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
 
@@ -22,12 +22,13 @@ class LpadNativeRecipe(ConanFile):
     def layout(self):
         # We make the assumption that if the compiler is msvc the
         # CMake generator is multi-config
+        builddir = os.environ.get('BUILDDIR', 'build')
         multi = True if self.settings.get_safe("compiler") == "msvc" else False
         if multi:
-            self.folders.generators = os.path.join("build", "generators")
-            self.folders.build = "build"
+            self.folders.generators = os.path.join(builddir, "generators")
+            self.folders.build = builddir
         else:
             self.folders.generators = os.path.join(
-                "build", str(self.settings.build_type), "generators"
+                builddir, str(self.settings.build_type), "generators"
             )
-            self.folders.build = os.path.join("build", str(self.settings.build_type))
+            self.folders.build = os.path.join(builddir, str(self.settings.build_type))
