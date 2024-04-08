@@ -1,0 +1,21 @@
+#pragma once
+
+#include <array>
+
+namespace cryptn::build {
+
+#define MAKE_STR(x) #x
+
+constexpr auto kProjectName = "@CMAKE_PROJECT_NAME@";
+constexpr auto kProjectDescr = "@CMAKE_PROJECT_DESCRIPTION@";
+
+constexpr std::array kProjectVersionParts{@CMAKE_PROJECT_VERSION_MAJOR@, @CMAKE_PROJECT_VERSION_MINOR@, @CMAKE_PROJECT_VERSION_PATCH@, @CMAKE_PROJECT_VERSION_TWEAK@};
+constexpr auto kProjectVersion = "@CMAKE_PROJECT_VERSION@";
+constexpr auto kProjectVersionSuffix = "@CMAKE_PROJECT_VERSION_SUFFIX@";
+
+constexpr auto kProjectFullVersion = "@CMAKE_PROJECT_VERSION@-@CMAKE_PROJECT_VERSION_SUFFIX@";
+
+#undef MAKE_VER_STR
+#undef MAKE_STR
+    
+} // cryptn::build

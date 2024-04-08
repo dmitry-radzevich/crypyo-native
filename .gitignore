@@ -1,0 +1,8 @@
+build*/
+.settings
+*.bak
+*.out
+CMakeUserPresets.json
+
+/src/gui
+/src/test
