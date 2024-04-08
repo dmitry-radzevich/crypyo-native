@@ -4,7 +4,9 @@ A native app for various crypto calculations using Botan as the back-end.
 
 ## Hacking
 
-- Branching model: **GitFlow**
+- Versioning: [SemVer](https://semver.org)
+- Commit comments: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- Branching model: [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)
 
 ## Build
 
@@ -50,6 +52,10 @@ Then invoke the following command:
 ```bash
 conan install . --profile <PROFILE> --build=missing --deployer=conan_bindeps
 ```
+
+> *TIP*
+>
+> If needed, the default `build` folder can be customized by setting the `BUILDDIR` environment variable before invocing `conan install`
 
 ### Command-Line Build
 
